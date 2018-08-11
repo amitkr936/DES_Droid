@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textone" type="id">textone</item>
+    <item name="texttwo" type="id">texttwo</item>
+    <item name="edt1" type="id">edt1</item>
+</resources>
