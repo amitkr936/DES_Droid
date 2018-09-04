@@ -24,9 +24,8 @@
         android:id="@+id/editText"
         android:layout_width="299dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="207dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/textView3"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter the Input"
@@ -62,12 +61,31 @@
         android:layout_width="298dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="193dp"
-        android:layout_marginStart="45dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="158dp"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
-        android:hint="Enter the Key" />
+        android:hint="Enter the Key"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="156dp"
+        android:text="Enter a 16 bit Hexadecimal Character eg.123456ABCD132536" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="274dp"
+        android:layout_height="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="220dp"
+        android:layout_marginStart="35dp"
+        android:text="Enter a 16 bit Hexadecimal Key e.g-AABB09182736CCDD" />
 
 </RelativeLayout>

@@ -21,14 +21,16 @@
         android:textSize="30dp"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="247dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Output::"/>
+        android:layout_width="313dp"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="52dp"
+        android:layout_marginStart="58dp"
+        android:gravity="center"
+        android:text="Output"
+        android:textSize="20dp" />
+
 </RelativeLayout>

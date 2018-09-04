@@ -1,8 +1,11 @@
 package com.example.amitkrishna.desdroid;
 
+import android.widget.Toast;
+
 import java.util.*;
 
 public class DES {
+    String o;
 
     // Initial Permutation table
 
@@ -141,52 +144,59 @@ public class DES {
     private static int[][] subkey = new int[16][48];
     public DES(String input,String keys)
     {
-        String inp =input;
-        int inputBits[] = new int[64];
-        // inputBits will store the 64 bits of the input as a an int array of
-        // size 64. This program uses int arrays to store bits, for the sake
-        // of simplicity. For efficient programming, use long data type. But
-        // it increases program complexity which is unnecessary for this
-        // context.
-        for(int i=0 ; i < 16 ; i++) {
-            // For every character in the 16 bit input, we get its binary value
-            // by first parsing it into an int and then converting to a binary
-            // string
-            String s = Integer.toBinaryString(Integer.parseInt(input.charAt(i) + "", 16));
 
-            // Java does not add padding zeros, i.e. 5 is returned as 111 but
-            // we require 0111. Hence, this while loop adds padding 0's to the
-            // binary value.
-            while(s.length() < 4) {
-                s = "0" + s;
+            String inp = input;
+            int inputBits[] = new int[64];
+            // inputBits will store the 64 bits of the input as a an int array of
+            // size 64. This program uses int arrays to store bits, for the sake
+            // of simplicity. For efficient programming, use long data type. But
+            // it increases program complexity which is unnecessary for this
+            // context.
+            for (int i = 0; i < 16; i++) {
+                // For every character in the 16 bit input, we get its binary value
+                // by first parsing it into an int and then converting to a binary
+                // string
+                String s = Integer.toBinaryString(Integer.parseInt(input.charAt(i) + "", 16));
+
+                // Java does not add padding zeros, i.e. 5 is returned as 111 but
+                // we require 0111. Hence, this while loop adds padding 0's to the
+                // binary value.
+                while (s.length() < 4) {
+                    s = "0" + s;
+                }
+                // Add the 4 bits we have extracted into the array of bits.
+                for (int j = 0; j < 4; j++) {
+                    inputBits[(4 * i) + j] = Integer.parseInt(s.charAt(j) + "");
+                }
             }
-            // Add the 4 bits we have extracted into the array of bits.
-            for(int j=0 ; j < 4 ; j++) {
-                inputBits[(4*i)+j] = Integer.parseInt(s.charAt(j) + "");
+            String key = keys;//Same Operation in Input with the Key
+            int keyBits[] = new int[64];
+            for (int i = 0; i < 16; i++) {
+                String s = Integer.toBinaryString(Integer.parseInt(key.charAt(i) + "", 16));
+                while (s.length() < 4) {
+                    s = "0" + s;
+                }
+                for (int j = 0; j < 4; j++) {
+                    keyBits[(4 * i) + j] = Integer.parseInt(s.charAt(j) + "");
+                }
             }
-        }
-        String key = keys
-        int keyBits[] = new int[64];
-        for(int i=0 ; i < 16 ; i++) {
-            String s = Integer.toBinaryString(Integer.parseInt(key.charAt(i) + "", 16));
-            while(s.length() < 4) {
-                s = "0" + s;
-            }
-            for(int j=0 ; j < 4 ; j++) {
-                keyBits[(4*i)+j] = Integer.parseInt(s.charAt(j) + "");
-            }
-        }
+
 
         // permute(int[] inputBits, int[] keyBits, boolean isDecrypt)
         // method is used here. This allows encryption and decryption to be
         // done in the same method, reducing code.
         //System.out.println("\n+++ ENCRYPTION +++");
-        int outputBits[] = permute(inputBits, keyBits, false);
+        String outputBits = permute(inputBits, keyBits, false);
         //System.out.println("\n+++ DECRYPTION +++");
-        permute(outputBits, keyBits, true);
+        //permute(outputBits, keyBits, true);
+        o=outputBits;
 
     }
-    private static int[] permute(int[] inputBits, int[] keyBits, boolean isDecrypt) {
+    public String showop()
+    {
+        return o;
+    }
+    private String permute(int[] inputBits, int[] keyBits, boolean isDecrypt) {
         // Initial permutation step takes input bits and permutes into the
         // newBits array
         int newBits[] = new int[inputBits.length];
@@ -227,11 +237,11 @@ public class DES {
             int newR[] = new int[0];
             if(isDecrypt) {
                 newR = fiestel(R, subkey[15-n]);
-                System.out.print("Round key = ");
+              //  System.out.print("Round key = ");
                 displayBits(subkey[15-n]);
             } else {
                 newR = fiestel(R, KS(n, keyBits));
-                System.out.print("Round key = ");
+                //System.out.print("Round key = ");
                 displayBits(subkey[n]);
             }
             // xor-ing the L and new R gives the new L value. new L is stored
@@ -240,9 +250,9 @@ public class DES {
             int newL[] = xor(L, newR);
             L = R;
             R = newL;
-            System.out.print("L = ");
+          //  System.out.print("L = ");
             displayBits(L);
-            System.out.print("R = ");
+            //System.out.print("R = ");
             displayBits(R);
         }
 
@@ -276,8 +286,8 @@ public class DES {
         } else {
             System.out.print("Encrypted text: ");
         }
-        System.out.println(hex.toUpperCase());
-        return finalOutput;
+        //System.out.println(hex.toUpperCase());
+        return (hex.toUpperCase());
     }
 
     private static int[] KS(int round, int[] key) {
